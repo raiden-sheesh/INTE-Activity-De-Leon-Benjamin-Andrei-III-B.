@@ -1,0 +1,111 @@
+
+// Online IDE - Code Editor, Compiler, Interpreter
+
+
+class Student {
+    String name;
+    int[] quizzes;
+
+    Student(String name, int[] quizzes) {
+        this.name = name;
+        this.quizzes = quizzes;
+    }
+
+    double getAverage() {
+        int sum = 0;
+
+        for (int score : quizzes) {
+            sum += score;
+        }
+
+        return (double) sum / quizzes.length;
+    }
+}
+
+public class Main {
+
+   
+    static int searchRank(Student[] students, String name) {
+        for (int i = 0; i < students.length; i++) {
+            if (students[i].name.equalsIgnoreCase(name)) {
+                return i + 1;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+
+        String[] names = {"Rene", "tado", "esmiranghoy", "Kianbaho"};
+
+  
+        int[][] data = {
+            {90, 85, 88, 95},
+            {80, 85, 90, 85},
+            {90, 85, 88, 95},
+            {75, 80, 78, 82}
+        };
+
+        Student[] students = new Student[names.length];
+
+       
+        for (int i = 0; i < students.length; i++) {
+            students[i] = new Student(names[i], data[i]);
+        }
+
+      
+        for (int i = 0; i < students.length - 1; i++) {
+            int best = i;
+
+            for (int j = i + 1; j < students.length; j++) {
+                if (students[j].getAverage() >
+                    students[best].getAverage()) {
+                    best = j;
+                }
+            }
+
+            Student temp = students[i];
+            students[i] = students[best];
+            students[best] = temp;
+        }
+
+        System.out.println("===== STUDENT LEADERBOARD =====");
+        System.out.printf("%-6s %-10s %-8s%n", "Rank", "Name", "Average");
+
+        int rank = 1;
+
+        for (int i = 0; i < students.length; i++) {
+
+           
+            if (i > 0 &&
+                students[i].getAverage() != students[i - 1].getAverage()) {
+                rank = i + 1;
+            }
+
+            System.out.printf("%-6d %-10s %.2f%n",
+                rank, students[i].name, students[i].getAverage());
+        }
+
+        
+        String searchName = "Carlo";
+        int foundRank = -1;
+
+        for (int i = 0; i < students.length; i++) {
+            if (students[i].name.equalsIgnoreCase(searchName)) {
+                if (i > 0 &&
+                    students[i].getAverage() == students[i - 1].getAverage()) {
+                    foundRank = i;
+                } else {
+                    foundRank = i + 1;
+                }
+                break;
+            }
+        }
+
+        if (foundRank != -1) {
+            System.out.println(searchName + "'s rank: " + foundRank);
+        } else {
+            System.out.println("Student not found.");
+        }
+    }
+}

@@ -1,0 +1,46 @@
+
+// Online IDE - Code Editor, Compiler, Interpreter
+
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        int[] scores = new int[8];
+        int sum = 0;
+
+        System.out.println("Enter 8 student scores:");
+
+        for (int i = 0; i < scores.length; i++) {
+            System.out.print("Score " + (i + 1) + ": ");
+            scores[i] = input.nextInt();
+        }
+
+        int highest = scores[0];
+        int lowest = scores[0];
+
+        for (int i = 0; i < scores.length; i++) {
+            sum += scores[i];
+
+            if (scores[i] > highest) {
+                highest = scores[i];
+            }
+
+            if (scores[i] < lowest) {
+                lowest = scores[i];
+            }
+        }
+
+        double average = (double) sum / scores.length;
+
+        System.out.println("Sum: " + sum);
+        System.out.println("Average: " + average);
+        System.out.println("Highest Score: " + highest);
+        System.out.println("Lowest Score: " + lowest);
+
+        input.close();
+    }
+}
