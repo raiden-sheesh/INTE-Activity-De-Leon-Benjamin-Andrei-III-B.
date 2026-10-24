@@ -1,0 +1,35 @@
+
+// Online IDE - Code Editor, Compiler, Interpreter
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter username: ");
+        String username = sc.nextLine();
+
+        if (username.equals("raiden")) {
+            System.out.print("Enter password: ");
+            String password = sc.nextLine();
+
+            if (password.equals("sheesh")) {
+                System.out.print("Is account locked? (true/false): ");
+                boolean locked = Boolean.parseBoolean(sc.nextLine());
+
+                if (!locked) {
+                    System.out.println("Login successful!");
+                } else {
+                    System.out.println("Failed: Account is locked.");
+                }
+            } else {
+                System.out.println("Failed: Incorrect password.");
+            }
+        } else {
+            System.out.println("Failed: Incorrect username.");
+        }
+
+        sc.close();
+    }
+}
